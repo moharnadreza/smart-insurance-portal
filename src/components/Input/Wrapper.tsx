@@ -16,7 +16,11 @@ const InputWrapper = ({
   return (
     <div className={className}>
       {label && (
-        <label className="block text-sm mb-1 ms-1" htmlFor={name}>
+        <label
+          title={label}
+          className="block text-xs mb-1 ms-1 truncate"
+          htmlFor={name}
+        >
           {label}
           {isRequired && <sup>&nbsp;*</sup>}
         </label>

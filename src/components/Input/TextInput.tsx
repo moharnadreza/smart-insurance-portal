@@ -6,13 +6,12 @@ import { InputWrapper } from "./Wrapper";
 type Props = { ref: Ref<HTMLInputElement> } & CommonInputProps;
 
 const TextInput = ({
-  ref,
-  placeholder,
   label,
   isRequired,
   error,
   name,
   isDisabled,
+  ...restProps
 }: Props) => {
   const className = classNames(
     [
@@ -28,11 +27,7 @@ const TextInput = ({
 
   return (
     <InputWrapper {...{ name, error, label, isDisabled, isRequired }}>
-      <input
-        type="text"
-        {...{ name, ref, placeholder }}
-        className={className}
-      />
+      <input type="text" name={name} {...restProps} className={className} />
     </InputWrapper>
   );
 };

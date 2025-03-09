@@ -13,7 +13,7 @@ const InsurancePlansModal = () => {
     [plans, activeFormId]
   );
 
-  if (!form?.title) return null;
+  if (!form?.title || !form.fields) return null;
 
   return (
     <Modal
@@ -24,7 +24,7 @@ const InsurancePlansModal = () => {
         onClose: close,
       }}
     >
-      <InsurancePlansForm />
+      <InsurancePlansForm form={form} />
     </Modal>
   );
 };

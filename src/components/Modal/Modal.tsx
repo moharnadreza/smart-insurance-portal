@@ -25,7 +25,7 @@ const Modal = ({ isOpen, title, onClose, children }: Props) => {
            */
           if (event && event.stopPropagation) event.stopPropagation();
         }}
-        className="bg-white p-6 rounded-2xl max-w-lg w-full space-y-6"
+        className="bg-white p-6 rounded-2xl max-w-xl w-full space-y-6"
       >
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-bold">{title}</h4>
@@ -36,7 +36,7 @@ const Modal = ({ isOpen, title, onClose, children }: Props) => {
             <XMarkIcon width={14} height={14} />
           </button>
         </div>
-        <div className="min-h-36">{children}</div>
+        <div className="min-h-36 max-h-[80vh] overflow-auto">{children}</div>
       </div>
     </div>
   );

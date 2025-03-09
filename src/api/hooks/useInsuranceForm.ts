@@ -4,7 +4,7 @@ import { fetcher } from "utils";
 type Form = {
   formId: string;
   title: string;
-  fields: FormField[];
+  fields: Array<FormField>;
 };
 
 type FormField = {
@@ -52,4 +52,4 @@ const useInsuranceForm = () =>
   useSWR<FormSchema>("/api/insurance/forms", fetcher.get);
 
 export { useInsuranceForm };
-export type { Form };
+export type { Form, FormField };

@@ -16,7 +16,7 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className="antialiased">
-        <div className=" max-w-xl mx-auto mt-5 md:mt-24 px-4 sm:px-0 mb-24 flex flex-col gap-8">
+        <div className="max-w-xl mx-auto mt-5 md:mt-24 px-4 sm:px-0 mb-24 flex flex-col gap-8">
           <Header />
           {children}
         </div>

@@ -9,7 +9,6 @@ type Props = {
 } & CommonInputProps;
 
 const CurrencyInput = ({
-  ref,
   label,
   isRequired,
   error,
@@ -17,6 +16,7 @@ const CurrencyInput = ({
   name,
   isDisabled,
   currency = "USD",
+  ...restProps
 }: Props) => {
   const className = classNames(
     [
@@ -35,7 +35,8 @@ const CurrencyInput = ({
       <div className="relative flex items-center">
         <input
           type="number"
-          {...{ name, ref, placeholder }}
+          {...{ name, placeholder }}
+          {...restProps}
           className={className}
         />
 

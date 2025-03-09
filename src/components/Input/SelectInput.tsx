@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@heroicons/react/16/solid";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import classNames from "classnames";
 import { LoadingIndicator } from "components/Button";
 import type { Ref } from "react";
@@ -9,12 +9,11 @@ type Option = { label: string; value: string };
 
 type Props = {
   ref: Ref<HTMLSelectElement>;
-  options: Array<Option>;
+  options?: Array<Option>;
   isLoading?: boolean;
 } & Omit<CommonInputProps, "placeholder">;
 
 const SelectInput = ({
-  ref,
   name,
   options,
   label,
@@ -22,6 +21,7 @@ const SelectInput = ({
   isRequired,
   isDisabled,
   isLoading,
+  ...restProps
 }: Props) => {
   const className = classNames(
     [
@@ -38,8 +38,8 @@ const SelectInput = ({
   return (
     <InputWrapper {...{ name, error, label, isRequired, isDisabled }}>
       <div className="relative flex items-center">
-        <select {...{ name, id: name, ref }} className={className}>
-          {options.map(({ label, value }) => (
+        <select {...{ name, id: name }} {...restProps} className={className}>
+          {options?.map(({ label, value }) => (
             <option key={value} value={value}>
               {label}
             </option>
@@ -48,7 +48,7 @@ const SelectInput = ({
 
         <div
           className={classNames(
-            "absolute flex items-center justify-center gap-1 right-2 select-none -z-2",
+            "absolute flex items-center justify-center gap-1 right-2 select-none z-2",
             { "z-0": isDisabled || isLoading }
           )}
         >
@@ -60,4 +60,4 @@ const SelectInput = ({
   );
 };
 
-export default SelectInput;
+export { SelectInput };
