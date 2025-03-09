@@ -1,10 +1,12 @@
-"use client";
-import { useInsuranceForm } from "api/hooks/useInsuranceForm";
+import { useInsuranceForm } from "api";
 import { InsuranceCard } from "components";
+import { useModal } from "models";
 import { InsurancePlansSkeleton } from "./InsurancePlansSkeleton";
+import { InsurancePlansModal } from "./InsurancePlansModal";
 
 const InsurancePlans = () => {
   const { data: plans, isLoading } = useInsuranceForm();
+  const { open } = useModal();
 
   return (
     <>
@@ -14,19 +16,21 @@ const InsurancePlans = () => {
           {isLoading ? (
             <InsurancePlansSkeleton />
           ) : (
-            plans?.map(({ title, formId, fields }, index) => (
+            plans?.map(({ title, formId }, index) => (
               <InsuranceCard
                 key={formId}
                 label={title}
                 index={index + 1}
                 onClick={() => {
-                  console.log("fields ~> ", fields);
+                  open({ id: formId });
                 }}
               />
             ))
           )}
         </div>
       </div>
+
+      <InsurancePlansModal />
     </>
   );
 };

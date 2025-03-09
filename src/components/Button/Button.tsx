@@ -11,6 +11,9 @@ type Props = {
   isDisabled?: boolean;
 };
 
+/**
+ * ensure that the provided icon is always at the same size
+ */
 const IconComponent = ({ icon }: Pick<Props, "icon">) =>
   cloneElement(icon, { width: 14, height: 14 } as never);
 
@@ -24,8 +27,8 @@ const Button = ({
 }: Props) => {
   return (
     <button
-      {...{ onClick, type, disabled: isDisabled }}
-      className="px-3 py-2 text-xs cursor-pointer rounded-lg overflow-hidden inline-flex items-center justify-center gap-2 transition-colors duration-100 ease-in-out text-white bg-gray-900 hover:bg-gray-950 ring-3 focus:ring-gray-200"
+      {...{ onClick, type, disabled: isDisabled || isLoading }}
+      className="px-3 py-2 text-xs cursor-pointer rounded-lg overflow-hidden inline-flex items-center justify-center gap-1.5 transition-colors duration-100 ease-in-out text-white bg-gray-900 hover:bg-gray-950 ring-3 focus:ring-gray-200 disabled:bg-gray-700"
     >
       {isLoading ? <LoadingIndicator /> : <IconComponent {...{ icon }} />}
       {label}

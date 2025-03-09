@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import classNames from "classnames";
 import { LoadingIndicator } from "components/Button";
 import type { Ref } from "react";

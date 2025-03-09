@@ -1,16 +1,14 @@
-import { ArrowUturnLeftIcon } from "@heroicons/react/20/solid";
-import { Button } from "components/Button";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 import type { ReactNode } from "react";
 
 type Props = {
   isOpen: boolean;
   title: string;
-  description: string;
   onClose: () => void;
   children: ReactNode;
 };
 
-const Modal = ({ isOpen, title, description, onClose, children }: Props) => {
+const Modal = ({ isOpen, title, onClose, children }: Props) => {
   if (!isOpen) return null;
 
   return (
@@ -31,19 +29,17 @@ const Modal = ({ isOpen, title, description, onClose, children }: Props) => {
       >
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-bold">{title}</h4>
-          <span className="text-sm text-gray-800">{description}</span>
+          <button
+            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 cursor-pointer"
+            onClick={onClose}
+          >
+            <XMarkIcon width={14} height={14} />
+          </button>
         </div>
         <div className="min-h-36">{children}</div>
-        <div className="flex justify-end">
-          <Button
-            icon={<ArrowUturnLeftIcon />}
-            label="Close"
-            onClick={onClose}
-          />
-        </div>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export { Modal };
