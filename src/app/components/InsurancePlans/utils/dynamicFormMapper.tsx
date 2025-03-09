@@ -80,6 +80,17 @@ const singleFieldGenerator = ({
           }))}
         />
       );
+    case "checkbox":
+      return (
+        <SelectInput
+          key={id}
+          {...commonInputProps}
+          options={["Yes", "No"].map((option) => ({
+            label: option,
+            value: option,
+          }))}
+        />
+      );
   }
 };
 
