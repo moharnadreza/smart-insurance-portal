@@ -3,8 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField } from "api";
 import { Button } from "components";
 import { useForm } from "react-hook-form";
+import useSWRMutation from "swr/mutation";
+import { fetcher, toast } from "utils";
 import * as z from "zod";
 import { dynamicFormMapper } from "./utils";
+import { useModal } from "models";
 
 type Props = {
   form: Form;
@@ -32,6 +35,7 @@ const createSchema = (field: FormField) => {
 type Schema = z.infer<ReturnType<typeof getSchema>>;
 
 const InsurancePlansForm = ({ form }: Props) => {
+  const { close } = useModal();
   const {
     register,
     handleSubmit,
@@ -45,8 +49,20 @@ const InsurancePlansForm = ({ form }: Props) => {
   });
   const fields = dynamicFormMapper({ form, register, errors });
 
-  const onSubmit = (values: Schema) => {
-    console.log(values);
+  const { trigger, isMutating } = useSWRMutation(
+    "/api/insurance/forms/submit",
+    fetcher.post
+  );
+
+  const onSubmit = async (values: Schema) => {
+    try {
+      await trigger(values);
+      toast.success("Updated successfully!");
+      close();
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_error) {
+      toast.error("Something went wrong.");
+    }
   };
 
   return (
@@ -54,7 +70,12 @@ const InsurancePlansForm = ({ form }: Props) => {
       {fields}
 
       <div className="col-span-2 mt-2 flex justify-end">
-        <Button type="submit" label="Submit" icon={<CloudArrowUpIcon />} />
+        <Button
+          type="submit"
+          label="Submit"
+          icon={<CloudArrowUpIcon />}
+          isLoading={isMutating}
+        />
       </div>
     </form>
   );
