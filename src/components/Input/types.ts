@@ -7,6 +7,7 @@ type InputWrapperProps = {
   label?: string;
   isDisabled?: boolean;
   isRequired?: boolean;
+  isHidden?: boolean;
 };
 
 type CommonInputProps = {

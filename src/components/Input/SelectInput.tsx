@@ -21,6 +21,7 @@ const SelectInput = ({
   isRequired,
   isDisabled,
   isLoading,
+  isHidden,
   ...restProps
 }: Props) => {
   const className = classNames(
@@ -36,9 +37,13 @@ const SelectInput = ({
   );
 
   return (
-    <InputWrapper {...{ name, error, label, isRequired, isDisabled }}>
+    <InputWrapper {...{ name, error, label, isRequired, isDisabled, isHidden }}>
       <div className="relative flex items-center">
         <select {...{ name, id: name }} {...restProps} className={className}>
+          <option disabled selected value="">
+            Select
+          </option>
+
           {options?.map(({ label, value }) => (
             <option key={value} value={value}>
               {label}

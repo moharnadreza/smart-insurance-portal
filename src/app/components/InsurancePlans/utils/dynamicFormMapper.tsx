@@ -10,19 +10,40 @@ type Params = {
   form: Form;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<{ [x: string]: string }>;
+  values: { [x: string]: string | number };
 };
 
 type GeneratorParams = {
   field: FormField;
   register: UseFormRegister<FieldValues>;
   errors: FieldErrors<{ [x: string]: string }>;
+  values: { [x: string]: string | number };
 };
 
-const singleFieldGenerator = ({ field, register, errors }: GeneratorParams) => {
-  const { type, id, label, options, required } = field;
+const singleFieldGenerator = ({
+  field,
+  register,
+  errors,
+  values,
+}: GeneratorParams) => {
+  const { type, id, label, options, required, visibility, validation } = field;
+  const isVisible = visibility?.dependsOn
+    ? values[visibility.dependsOn] === visibility.value
+    : true;
+  const isRequired = isVisible && required;
+
   const commonInputProps = {
-    ...register(id),
-    ...{ id, label, isRequired: required, error: errors[id]?.message },
+    ...register(id, {
+      ...(isRequired && { required: "Required" }),
+      ...(validation?.pattern && { pattern: new RegExp(validation.pattern) }),
+    }),
+    ...{
+      id,
+      label,
+      isRequired,
+      error: errors[id]?.message,
+      isHidden: !isVisible,
+    },
   };
 
   switch (type) {
@@ -35,7 +56,16 @@ const singleFieldGenerator = ({ field, register, errors }: GeneratorParams) => {
         <CurrencyInput
           key={id}
           {...commonInputProps}
-          {...register(id, { valueAsNumber: true })}
+          label={
+            validation?.min && validation?.max
+              ? `${label} (${validation.min} - ${validation.max})`
+              : label
+          }
+          {...register(id, {
+            valueAsNumber: true,
+            min: validation?.min,
+            max: validation?.max,
+          })}
         />
       );
     case "select":
@@ -57,26 +87,35 @@ const groupFieldGenerator = ({
   field: { fields, label, id },
   register,
   errors,
+  values,
 }: GeneratorParams) => (
   <div
     key={id}
-    className="p-4 bg-gray-50 rounded-lg col-span-2 flex flex-col gap-4"
+    className="relative col-span-full flex flex-col gap-4 overflow-hidden"
   >
-    <h5 className="font-bold text-xs">{label}</h5>
-    <div className="grid grid-cols-2 gap-4">
+    <h5 className="w-full absolute font-black group-hover:text-gray-200 text-[8rem] left-0 -top-14 bg-gradient-to-r from-gray-50 to-transparent inline-block text-transparent bg-clip-text truncate select-none z-0">
+      {label}
+    </h5>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {fields?.map((innerField) =>
-        singleFieldGenerator({ field: innerField, register, errors })
+        singleFieldGenerator({ field: innerField, register, errors, values })
       )}
     </div>
   </div>
 );
 
-const dynamicFormMapper = ({ form: { fields }, register, errors }: Params) =>
+const dynamicFormMapper = ({
+  form: { fields },
+  register,
+  errors,
+  values,
+}: Params) =>
   fields.map((field) =>
     (field.type === "group" ? groupFieldGenerator : singleFieldGenerator)({
       field,
       register,
       errors,
+      values,
     })
   );
 

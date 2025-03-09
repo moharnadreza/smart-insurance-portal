@@ -14,6 +14,7 @@ const DateInput = ({
   placeholder,
   name,
   isDisabled,
+  isHidden,
   ...restProps
 }: Props) => {
   const className = classNames(
@@ -29,7 +30,7 @@ const DateInput = ({
   );
 
   return (
-    <InputWrapper {...{ name, error, label, isDisabled, isRequired }}>
+    <InputWrapper {...{ name, error, label, isDisabled, isRequired, isHidden }}>
       <input
         type="date"
         {...{ name, placeholder }}

@@ -15,7 +15,7 @@ const Modal = ({ isOpen, title, onClose, children }: Props) => {
     <div
       role="button"
       onClick={onClose}
-      className="fixed inset-0 flex items-center justify-center z-50 bg-stone-950/80 transition-all"
+      className="fixed inset-0 flex items-center justify-center z-50 bg-stone-950/90 transition-all"
     >
       <div
         role="button"
@@ -25,7 +25,7 @@ const Modal = ({ isOpen, title, onClose, children }: Props) => {
            */
           if (event && event.stopPropagation) event.stopPropagation();
         }}
-        className="bg-white p-6 rounded-2xl max-w-xl w-full space-y-6"
+        className="mx-auto bg-white p-6 rounded-2xl max-w-[90vw] md:max-w-xl w-full space-y-6"
       >
         <div className="flex justify-between items-center">
           <h4 className="text-lg font-bold">{title}</h4>

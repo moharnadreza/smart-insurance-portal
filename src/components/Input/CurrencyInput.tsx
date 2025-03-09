@@ -15,6 +15,7 @@ const CurrencyInput = ({
   placeholder,
   name,
   isDisabled,
+  isHidden,
   currency = "USD",
   ...restProps
 }: Props) => {
@@ -31,7 +32,7 @@ const CurrencyInput = ({
   );
 
   return (
-    <InputWrapper {...{ name, error, label, isDisabled, isRequired }}>
+    <InputWrapper {...{ name, error, label, isDisabled, isRequired, isHidden }}>
       <div className="relative flex items-center">
         <input
           type="number"

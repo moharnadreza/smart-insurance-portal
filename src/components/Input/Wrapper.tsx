@@ -8,10 +8,13 @@ const InputWrapper = ({
   error,
   isRequired,
   isDisabled = false,
+  isHidden = true,
 }: InputWrapperProps) => {
   const className = classNames("relative", {
     "cursor-not-allowed select-none": isDisabled,
   });
+
+  if (isHidden) return null;
 
   return (
     <div className={className}>

@@ -13,7 +13,7 @@ const InsuranceCard = ({ label, onClick, index }: Props) => {
       role="button"
       className="group relative cursor-pointer overflow-hidden px-4 py-3 flex flex-col items-start justify-start rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors duration-150"
     >
-      <span className="absolute font-black text-gray-100 group-hover:text-gray-200 text-[8rem] left-2 -top-6 transition-colors duration-150">
+      <span className="absolute font-black text-gray-100 group-hover:text-gray-200 text-[8rem] left-2 -top-6 transition-colors duration-150 select-none">
         {index}
       </span>
       <span className="font-medium text-sm z-10">{label}</span>

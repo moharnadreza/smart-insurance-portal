@@ -11,6 +11,7 @@ const TextInput = ({
   error,
   name,
   isDisabled,
+  isHidden,
   ...restProps
 }: Props) => {
   const className = classNames(
@@ -26,7 +27,7 @@ const TextInput = ({
   );
 
   return (
-    <InputWrapper {...{ name, error, label, isDisabled, isRequired }}>
+    <InputWrapper {...{ name, error, label, isDisabled, isRequired, isHidden }}>
       <input type="text" name={name} {...restProps} className={className} />
     </InputWrapper>
   );
