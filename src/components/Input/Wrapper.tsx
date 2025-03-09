@@ -30,7 +30,7 @@ const InputWrapper = ({
 
       {error && (
         <span
-          className="text-red-500 absolute -bottom-5 left-1 text-xs break-words"
+          className="text-red-500 ms-1 text-xs break-words"
           data-testid={`${name}-error`}
         >
           {error}

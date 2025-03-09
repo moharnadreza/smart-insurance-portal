@@ -16,14 +16,7 @@ const InsurancePlansModal = () => {
   if (!form?.title || !form.fields) return null;
 
   return (
-    <Modal
-      {...{
-        isOpen,
-        title: form.title,
-        description: "meow meow",
-        onClose: close,
-      }}
-    >
+    <Modal {...{ isOpen, title: form.title, onClose: close }}>
       <InsurancePlansForm form={form} />
     </Modal>
   );
