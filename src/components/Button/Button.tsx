@@ -15,7 +15,7 @@ type Props = {
  * ensure that the provided icon is always at the same size
  */
 const IconComponent = ({ icon }: Pick<Props, "icon">) =>
-  cloneElement(icon, { width: 14, height: 14 } as never);
+  cloneElement(icon, { width: 14, height: 14, "data-testid": "icon" } as never);
 
 const Button = ({
   label,

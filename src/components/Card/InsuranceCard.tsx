@@ -18,7 +18,7 @@ const InsuranceCard = ({ label, onClick, index }: Props) => {
       </span>
       <span className="font-medium text-sm z-10">{label}</span>
       <div className="p-2 rounded-lg border-1 border-gray-200 bg-gray-50 group-hover:bg-gray-100 self-end transition-colors duration-150">
-        <ChevronRightIcon width={14} height={14} />
+        <ChevronRightIcon width={14} height={14} data-testid="icon" />
       </div>
     </div>
   );

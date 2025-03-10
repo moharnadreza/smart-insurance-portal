@@ -32,6 +32,7 @@ const Modal = ({ isOpen, title, onClose, children }: Props) => {
           <button
             className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 cursor-pointer"
             onClick={onClose}
+            data-testid="close"
           >
             <XMarkIcon width={14} height={14} />
           </button>

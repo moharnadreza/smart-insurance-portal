@@ -1,6 +1,7 @@
 const LoadingIndicator = () => {
   return (
     <svg
+      data-testid="loading-indicator"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
