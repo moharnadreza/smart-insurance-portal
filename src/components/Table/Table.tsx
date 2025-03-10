@@ -5,23 +5,46 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/react/16/solid";
+import { RankingInfo, rankItem } from "@tanstack/match-sorter-utils";
 import {
   type ColumnOrderState,
+  type FilterFn,
   type PaginationState,
   type SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TableColumnsDropdown } from "./TableColumnSelector";
+
+declare module "@tanstack/react-table" {
+  //add fuzzy filter to the filterFns
+  interface FilterFns {
+    fuzzy: FilterFn<unknown>;
+  }
+  interface FilterMeta {
+    itemRank: RankingInfo;
+  }
+}
 
 type Props = {
   columns?: Array<string>;
   data?: Array<Record<string, string>>;
+};
+
+/**
+ * custom fuzzy filter function to apply ranking info to rows
+ */
+const fuzzyFilter: FilterFn<unknown> = (row, columnId, value, addMeta) => {
+  const itemRank = rankItem(row.getValue(columnId), value);
+
+  addMeta({ itemRank });
+  return itemRank.passed;
 };
 
 const Table = ({ columns, data }: Props) => {
@@ -32,6 +55,7 @@ const Table = ({ columns, data }: Props) => {
     pageSize: 1,
   });
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const table = useReactTable({
     data: data ?? [],
@@ -40,12 +64,16 @@ const Table = ({ columns, data }: Props) => {
         accessorKey: column,
         header: () => column,
       })) || [],
+    filterFns: { fuzzy: fuzzyFilter },
     state: {
       columnVisibility,
       columnOrder,
       pagination,
       sorting,
+      globalFilter,
     },
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: "fuzzy",
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     getPaginationRowModel: getPaginationRowModel(),
@@ -53,15 +81,17 @@ const Table = ({ columns, data }: Props) => {
     onColumnVisibilityChange: setColumnVisibility,
     onColumnOrderChange: setColumnOrder,
     getCoreRowModel: getCoreRowModel(),
-    debugTable: true,
-    debugHeaders: true,
-    debugColumns: true,
+    getFilteredRowModel: getFilteredRowModel(),
   });
 
   return (
     <div>
-      <div className="flex flex-col items-end gap-2 mb-4">
-        {/* <TextInput /> */}
+      <div className="flex justify-between gap-2 mb-4">
+        <DebouncedInput
+          value={globalFilter ?? ""}
+          onChange={(value) => setGlobalFilter(String(value))}
+          placeholder="Search all columns..."
+        />
         <TableColumnsDropdown {...{ table }} />
       </div>
 
@@ -188,6 +218,40 @@ const Table = ({ columns, data }: Props) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const DebouncedInput = ({
+  value: initialValue,
+  onChange,
+  debounce = 500,
+  ...props
+}: {
+  value: string | number;
+  onChange: (value: string | number) => void;
+  debounce?: number;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, "onChange">) => {
+  const [value, setValue] = useState(initialValue);
+
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange(value);
+    }, debounce);
+
+    return () => clearTimeout(timeout);
+  }, [value]);
+
+  return (
+    <input
+      {...props}
+      value={value}
+      className="w-full md:w-1/2 px-3 py-2 text-xs rounded-lg border-1 border-gray-200 transition-colors duration-50 ease-out placeholder:text-gray-300 placeholder:text-xs focus:outline-none focus:border-gray-500"
+      onChange={(e) => setValue(e.target.value)}
+    />
   );
 };
 

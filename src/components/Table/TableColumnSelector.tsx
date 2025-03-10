@@ -7,13 +7,13 @@ type Props = {
 
 const TableColumnsDropdown = ({ table }: Props) => {
   return (
-    <div className="relative group pb-1">
-      <div className="flex gap-2 items-center bg-gray-50 border border-gray-200 px-4 py-2 rounded-md cursor-pointer">
+    <div className="relative group">
+      <div className="flex gap-2 items-center bg-gray-50 border border-gray-200 px-4 py-2 rounded-md group-hover:rounded-b-none cursor-pointer">
         <ViewColumnsIcon width={14} height={14} />
         <span className="font-medium text-xs">Columns</span>
       </div>
 
-      <div className="hidden group-hover:flex flex-col absolute right-0 top-full min-w-36 rounded-md divide-gray-200 divide-y bg-gray-50 border border-gray-200">
+      <div className="hidden group-hover:flex flex-col absolute right-0 top-[33px] min-w-36 rounded-md rounded-tr-none divide-gray-200 divide-y bg-gray-50 border border-gray-200">
         {table.getAllLeafColumns().map((column) => {
           return (
             <label
