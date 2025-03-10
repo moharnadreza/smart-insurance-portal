@@ -10,9 +10,9 @@ const InsurancePlans = () => {
 
   return (
     <>
-      <div className="mt-32 flex justify-center flex-col gap-4">
-        <h3 className="m-0 text-3xl font-bold">Featured Plans</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4 overflow-auto">
+      <div className="mt-6 md:mt-32 flex justify-center flex-col gap-4">
+        <h3 className="m-0 text-lg md:text-3xl font-bold">Featured Plans</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
           {isLoading ? (
             <InsurancePlansSkeleton />
           ) : (

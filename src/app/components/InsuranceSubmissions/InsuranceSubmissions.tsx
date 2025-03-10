@@ -7,8 +7,8 @@ const InsuranceSubmissions = () => {
 
   return (
     <>
-      <div className="mt-16 flex justify-center flex-col gap-4">
-        <h3 className="m-0 text-3xl font-bold">Submissions</h3>
+      <div className="mt-6 md:mt-16 flex justify-center flex-col gap-4">
+        <h3 className="m-0 text-lg md:text-3xl font-bold">Submissions</h3>
         {isLoading ? (
           <InsurancePlansSkeleton />
         ) : (
