@@ -52,4 +52,4 @@ const useInsuranceForm = () =>
   useSWR<FormSchema>("/api/insurance/forms", fetcher.get);
 
 export { useInsuranceForm };
-export type { Form, FormField };
+export type { Form, FormField, DynamicOptions };

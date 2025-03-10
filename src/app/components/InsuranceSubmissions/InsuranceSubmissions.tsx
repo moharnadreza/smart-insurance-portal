@@ -1,4 +1,4 @@
-import { useInsuranceSubmissions } from "api/hooks/useInsuranceSubmissions";
+import { useInsuranceSubmissions } from "api";
 import { Table } from "components";
 import { InsurancePlansSkeleton } from "./InsuranceSubmissionsSkeleton";
 

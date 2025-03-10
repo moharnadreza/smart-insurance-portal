@@ -26,7 +26,16 @@ const singleFieldGenerator = ({
   errors,
   values,
 }: GeneratorParams) => {
-  const { type, id, label, options, required, visibility, validation } = field;
+  const {
+    type,
+    id,
+    label,
+    options,
+    required,
+    visibility,
+    validation,
+    dynamicOptions,
+  } = field;
   const isVisible = visibility?.dependsOn
     ? values[visibility.dependsOn] === visibility.value
     : true;
@@ -74,6 +83,8 @@ const singleFieldGenerator = ({
         <SelectInput
           key={id}
           {...commonInputProps}
+          formValues={values}
+          dynamicOptions={dynamicOptions}
           options={options?.map((option) => ({
             label: option,
             value: option,
@@ -84,6 +95,7 @@ const singleFieldGenerator = ({
       return (
         <SelectInput
           key={id}
+          formValues={values}
           {...commonInputProps}
           options={["Yes", "No"].map((option) => ({
             label: option,
