@@ -17,6 +17,7 @@ import {
 } from "@tanstack/react-table";
 import classNames from "classnames";
 import { useState } from "react";
+import { TableColumnsDropdown } from "./TableColumnSelector";
 
 type Props = {
   columns?: Array<string>;
@@ -60,26 +61,8 @@ const Table = ({ columns, data }: Props) => {
   return (
     <div>
       <div className="flex flex-col items-end gap-2 mb-4">
-        <span className="font-medium text-xs">Columns:</span>
-        <div className="flex gap-2">
-          {table.getAllLeafColumns().map((column) => {
-            return (
-              <div key={column.id} className="px-1">
-                <label className="text-xs flex items-center gap-1">
-                  <input
-                    className="bg-gray-200"
-                    {...{
-                      type: "checkbox",
-                      checked: column.getIsVisible(),
-                      onChange: column.getToggleVisibilityHandler(),
-                    }}
-                  />{" "}
-                  {column.id}
-                </label>
-              </div>
-            );
-          })}
-        </div>
+        {/* <TextInput /> */}
+        <TableColumnsDropdown {...{ table }} />
       </div>
 
       <table className="min-w-full bg-gray-50 rounded-2xl">
