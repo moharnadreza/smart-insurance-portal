@@ -28,7 +28,7 @@ const Button = ({
   return (
     <button
       {...{ onClick, type, disabled: isDisabled || isLoading }}
-      className="w-full px-6 py-3 text-sm cursor-pointer rounded-lg overflow-hidden inline-flex items-center justify-center gap-1.5 transition-colors duration-100 ease-in-out text-white bg-gray-900 hover:bg-gray-950 ring-3 focus:ring-gray-200 disabled:bg-gray-700"
+      className="w-full px-6 py-3 text-sm cursor-pointer rounded-lg overflow-hidden inline-flex items-center justify-center gap-1.5 transition-colors duration-100 ease-in-out text-white bg-gray-900 hover:bg-gray-950 ring-3 focus:ring-gray-200 disabled:bg-gray-700 disabled:opacity-45"
     >
       {isLoading ? <LoadingIndicator /> : <IconComponent {...{ icon }} />}
       {label}

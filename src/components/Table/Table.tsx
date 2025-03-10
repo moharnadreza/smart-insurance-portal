@@ -188,28 +188,28 @@ const Table = ({ columns, data }: Props) => {
 
         <div className="flex items-center gap-1">
           <button
-            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed"
+            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed disabled:opacity-45"
             onClick={() => table.firstPage()}
             disabled={!table.getCanPreviousPage()}
           >
             <ChevronDoubleLeftIcon width={14} height={14} />
           </button>
           <button
-            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed"
+            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed disabled:opacity-45"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
             <ChevronLeftIcon width={14} height={14} />
           </button>
           <button
-            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed"
+            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed disabled:opacity-45"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
             <ChevronRightIcon width={14} height={14} />
           </button>
           <button
-            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed"
+            className="appearance-none p-2 rounded-lg border-1 border-gray-200 hover:bg-gray-100 disabled:bg-gray-50 cursor-pointer disabled:cursor-not-allowed disabled:opacity-45"
             onClick={() => table.lastPage()}
             disabled={!table.getCanNextPage()}
           >
