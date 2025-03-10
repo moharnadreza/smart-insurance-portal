@@ -13,7 +13,7 @@ const TableColumnsDropdown = ({ table }: Props) => {
         <span className="font-medium text-xs">Columns</span>
       </div>
 
-      <div className="hidden group-hover:flex flex-col absolute right-0 top-[33px] min-w-36 rounded-md rounded-tr-none divide-gray-200 divide-y bg-gray-50 border border-gray-200">
+      <div className="hidden group-hover:flex flex-col absolute right-0 top-[33px] min-w-36 rounded-md rounded-tr-none divide-gray-200 divide-y bg-gray-50 border border-gray-200 z-10">
         {table.getAllLeafColumns().map((column) => {
           return (
             <label
